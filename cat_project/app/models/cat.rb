@@ -7,6 +7,8 @@ class Cat < ActiveRecord::Base
   validates :color, inclusion: { in: CAT_COLORS, message: "%{value} is not a valid color" }
   validates :age, :birth_date, :color, :name, :sex, presence: true
 
+  has_many :requests, class_name: "CatRentalRequest", foreign_key: :cat_id, primary_key: :id
+
   def self.cat_colors
     CAT_COLORS.sort
   end

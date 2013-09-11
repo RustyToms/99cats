@@ -1,5 +1,8 @@
 CatProject::Application.routes.draw do
-  resources :cats
+  resources :cats do
+    resources :cat_rental_requests, only: :index
+  end
+  resources :cat_rental_requests
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

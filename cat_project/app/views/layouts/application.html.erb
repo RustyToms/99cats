@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>CatProject</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  Params: <%= debug params %>
 <%= yield %>
+
+<a href= "<%=cats_url%>">Show all cats</a>
+<br>
+<a href= "<%=new_cat_url%>">Create a new cat!</a>
 
 </body>
 </html>
