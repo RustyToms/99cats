@@ -1,0 +1,10 @@
+<h1>Edit bundle of joy!</h1>
+
+<form action="<%=cat_url(@cat)%>" method="POST">
+  <input type = "hidden" name="_method" value="PUT">
+  <%= render "form", params: @params, colors: @colors %>
+
+</form>
+<br>
+<a href= "<%=cats_url%>">Back to all cats</a>
+

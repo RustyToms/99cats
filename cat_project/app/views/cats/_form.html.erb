@@ -1,0 +1,33 @@
+  <label for="cat_name">Name:</label>
+  <input type="text" name="cat[name]" id="cat_name" value=<%="#{params[:name]}"%>><br>
+
+<p></p>
+
+  <label for="cat_birth_date">Birthdate:</label>
+  <input type="date" name="cat[birth_date]" id="cat_birth_date" value=<%="#{params[:birth_date]}"%>><br>
+
+<p></p>
+
+  <label for="cat_age">Age:</label>
+  <input type="text" name="cat[age]" id="cat_age", value=<%="#{params[:age]}"%>><br>
+
+<p></p>
+
+  <label for="cat_sex">Gender:</label><br>
+  <input type="radio" name="cat[sex]" value="M" id="cat_sex" <%= "checked" if params[:sex] == "M" %> >Male<br>
+  <input type="radio" name="cat[sex]" value="F" id="cat_sex" <%= "checked" if params[:sex] == "F" %>>Female<br>
+
+<p></p>
+
+  <label for="cat_color">Color:</label>
+  <select name="cat[color]" id="cat_color">
+    <option></option>
+    <% colors.each do |color|%>
+      <option value="<%=color%>" <%= "selected" if params[:color] == color %>><%="#{color}"%></option>
+    <% end %>
+  </select><br>
+
+<p></p>
+
+  <input type="submit" value="Submit your cat!">
+
