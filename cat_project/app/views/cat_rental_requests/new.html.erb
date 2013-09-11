@@ -1,0 +1,33 @@
+<h1>Reserve your cat today!</h1>
+
+<form action="<%=cat_rental_requests_url%>" method="post">
+
+  <label>Select a fine, furry friend:
+  <select name="cat_rental_request[cat_id]">
+    <option></option>
+    <% @cats.each do |cat|%>
+      <option value="<%=cat.id%>" <%= "selected" if @request.cat_id == cat.id %>>
+        <%="#{cat.name}"%></option>
+    <% end %>
+  </select></label><br>
+
+<p></p>
+
+  <label>Start Date:
+  <input type="date" name="cat_rental_request[start_date]" value=<%="#{@request.start_date}"%>>
+  </label>
+
+<p></p>
+
+  <label>End Date:
+  <input type="date" name="cat_rental_request[end_date]" value=<%="#{@request.end_date}"%>>
+  </label>
+
+<p></p>
+
+  <input type="submit" value="Make your request!">
+
+<p></p>
+
+</form>
+
