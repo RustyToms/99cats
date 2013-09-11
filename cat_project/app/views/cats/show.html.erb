@@ -23,4 +23,19 @@
   </tr>
 </table>
 
+<label><%= "#{@cat.name}"%>'s Schedule
+  <table>
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+    <% @cat.requests.each do |request| %>
+    <tr>
+      <td><%= "#{request.start_date}"%></td>
+      <td><%= "#{request.end_date}"%></td>
+    </tr>
+    <% end %>
+  </table>
+</label>
+
 <a href= "<%=edit_cat_url(@cat)%>">Edit This Cat</a><br>
