@@ -33,9 +33,14 @@
     <tr>
       <td><%= "#{request.start_date}"%></td>
       <td><%= "#{request.end_date}"%></td>
+      <% if request.status == 'PENDING' %>
+        <td><%=button_to "Approve", approve_cat_rental_request_url(request.id), method: :post %></td>
+        <td><%=button_to "Deny", deny_cat_rental_request_url(request.id), method: :post %></td>
+      <%end%>
     </tr>
     <% end %>
   </table>
 </label>
 
-<a href= "<%=edit_cat_url(@cat)%>">Edit This Cat</a><br>
+<a href= "<%=edit_cat_url(@cat)%>">Edit This Cat</a>
+<a href= "<%=reserve_cat_cat_rental_request_url(@cat)%>">Reserve This Cat</a><br>
