@@ -1,0 +1,21 @@
+<h1>Create a new bundle of joy!</h1>
+
+<form action="<%=cats_url%>" method="post">
+
+  <label for="cat_name">Name:</label>
+  <input type="text" name="cat[name]" id="cat_name">
+
+
+
+  <label for="cat_color">Color:</label>
+  <select name="cat[color]" id="cat_color">
+    <% @colors.each do |color|%>
+
+    <option value="<%color%>"><%="#{color}"%></option>
+
+      <% end %>
+</form>
+
+
+<!-->#:age, :birth_date, :color, :name, :sex
+black orange calico white brown grey blue steel striped spotted tan-->

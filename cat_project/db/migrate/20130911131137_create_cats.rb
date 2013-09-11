@@ -5,7 +5,7 @@ class CreateCats < ActiveRecord::Migration
       t.date :birth_date, null:false
       t.string :color, null:false
       t.string :name, null:false
-      t.char :sex, null:false
+      t.string :sex, null:false
 
       t.timestamps
     end
