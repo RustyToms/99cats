@@ -3,19 +3,35 @@
 <form action="<%=cats_url%>" method="post">
 
   <label for="cat_name">Name:</label>
-  <input type="text" name="cat[name]" id="cat_name">
+  <input type="text" name="cat[name]" id="cat_name"><br>
 
+<p></p>
 
+  <label for="cat_birth_date">Birthdate:</label>
+  <input type="date" name="cat[birth_date]" id="cat_birth_date"><br>
+
+<p></p>
+
+  <label for="cat_age">Age:</label>
+  <input type="text" name="cat[age]" id="cat_age"><br>
+
+<p></p>
+
+  <label for="cat_sex">Gender:</label><br>
+  <input type="radio" name="cat[sex]" value="M" id="cat_sex">Male<br>
+  <input type="radio" name="cat[sex]" value="F" id="cat_sex">Female<br>
+
+<p></p>
 
   <label for="cat_color">Color:</label>
   <select name="cat[color]" id="cat_color">
     <% @colors.each do |color|%>
+      <option value="<%color%>"><%="#{color}"%></option>
+    <% end %>
+  </select><br>
 
-    <option value="<%color%>"><%="#{color}"%></option>
+<p></p>
 
-      <% end %>
+  <input type="submit" value="Submit your cat!">
+
 </form>
-
-
-<!-->#:age, :birth_date, :color, :name, :sex
-black orange calico white brown grey blue steel striped spotted tan-->
