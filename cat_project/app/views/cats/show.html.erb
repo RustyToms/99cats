@@ -1,9 +1,15 @@
 <h1>Check out this cat!</h1>
 
+<%=@cat.pic_html.html_safe%>
+
 <table>
   <tr>
     <td>Name:</td>
     <td><%="#{@cat.name}"%></td>
+  </tr>
+  <tr>
+    <td>Owner:</td>
+    <td><%="#{@cat.owner.user_name}"%></td>
   </tr>
   <tr>
     <td>Age:</td>
@@ -42,9 +48,11 @@
   </table>
 </label>
 
-<%=@cat.pic_html.html_safe%>
+<p></p>
 
-<%#"#{@cat.pic_html}"%>
+<% if @cat.user_id == current_user.id %>
+    <%=button_to "Delete this cat", cat_url(@cat), method: :delete %><br>
+<%end%>
 
 <a href= "<%=edit_cat_url(@cat.id)%>">Edit This Cat</a>
 <a href= "<%=reserve_cat_cat_rental_request_url(@cat)%>">Reserve This Cat</a><br>

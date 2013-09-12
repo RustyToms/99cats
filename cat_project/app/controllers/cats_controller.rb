@@ -9,7 +9,7 @@ class CatsController < ApplicationController
   end
 
   def show
-    @cat = Cat.includes(:requests).find(params[:id])
+    @cat = Cat.includes(:requests, :owner).find(params[:id])
     render :show
   end
 
@@ -21,11 +21,6 @@ class CatsController < ApplicationController
 
   def edit
     @cat = Cat.find(params[:id])
-
-    # if current_user.nil? || current_user.id != @cat.user_id
-    #   flash[:errors] = "Cannot edit a cat that you don't own."
-    #   redirect_to cat_url(params[:id])
-    # else
       @params = {name: @cat.name, age: @cat.age, birth_date: @cat.birth_date,
         color: @cat.color, sex: @cat.sex}
       @colors = Cat.cat_colors
@@ -56,6 +51,12 @@ class CatsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @cat = Cat.find(params[:id])
+    @cat.destroy
+    redirect_to cats_url
   end
 
   private
