@@ -1,6 +1,6 @@
 class CatsController < ApplicationController
 
-  before_filter :check_owner, except: [:show, :index, :new]
+  before_filter :check_owner, except: [:show, :index, :new, :create]
   skip_before_filter :check_login, only: [:index, :show]
 
   def index
@@ -39,7 +39,7 @@ class CatsController < ApplicationController
     @colors = Cat.cat_colors
     if @cat.update_attributes(@params)
       @cats = Cat.all
-      redirect_to cats_url
+      redirect_to cat_url(@cat)
     else
       render :edit
     end
@@ -49,10 +49,10 @@ class CatsController < ApplicationController
     @params = params[:cat]
     @cat = Cat.new(params[:cat])
     @colors = Cat.cat_colors
-    @cat.user_id = current_user
+    @cat.user_id = current_user.id
     if @cat.save
       @cats = Cat.all
-      redirect_to cats_url
+      redirect_to cat_url(@cat)
     else
       render :new
     end
