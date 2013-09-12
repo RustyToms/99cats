@@ -14,7 +14,7 @@
     <li><%= button_to "Logout", session_url, method: :delete %></li>
   </ul>
   <% else %>
-    <li>Not Currently Log In</li>
+    <li>Not Currently Logged In</li>
     <li><%= button_to "Log In", new_session_url, method: :get %></li>
     <li><%= button_to "Create New Account", new_user_url, method: :get %></li>
   <% end %>

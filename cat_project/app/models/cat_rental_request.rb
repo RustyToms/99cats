@@ -33,5 +33,4 @@ class CatRentalRequest < ActiveRecord::Base
   def set_status_pending
     self.status ||= "PENDING"
   end
-
 end

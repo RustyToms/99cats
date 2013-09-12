@@ -3,15 +3,27 @@
 <form action="<%=cat_rental_requests_url%>" method="post">
 
   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+  <% if @request.cat_id.nil? %>
+
 
   <label>Select a fine, furry friend:
   <select name="cat_rental_request[cat_id]">
     <option></option>
     <% @cats.each do |cat|%>
-      <option value="<%=cat.id%>" <%= "selected" if @request.cat_id == cat.id %>>
+      <option value="<%=cat.id%>">
         <%="#{cat.name}"%></option>
     <% end %>
   </select></label><br>
+  <% else %>
+  <%@cats.each do |cat|%>
+    <%if cat.id.to_s == params[:cat_id]%>
+      <%=cat.pic_html.html_safe%>
+      <h2><%=cat.name%></h2><br>
+      <input type="hidden" name="cat_rental_request[cat_id]" value= <%=cat.id%>>
+    <%end%>
+  <%end%>
+  <%end%>
+
 
 <p></p>
 

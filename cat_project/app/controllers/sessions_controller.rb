@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+skip_before_filter :check_owner
+
   def create
     @user = User.find_by_credentials(params[:user_name], params[:password])
 

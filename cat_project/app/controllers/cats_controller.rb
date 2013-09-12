@@ -1,5 +1,8 @@
 class CatsController < ApplicationController
 
+  before_filter :check_owner, except: [:show, :index, :new]
+  skip_before_filter :check_login, only: [:index, :show]
+
   def index
     @cats = Cat.all
     render :index
@@ -18,27 +21,16 @@ class CatsController < ApplicationController
 
   def edit
     @cat = Cat.find(params[:id])
-    puts "
 
-
-
-    CURRENT USER ID
-
-
-
-
-    "
-    p current_user
-
-    if current_user.nil? || current_user.id != @cat.user_id
-      flash[:errors] = "Cannot edit a cat that you don't own."
-      redirect_to cat_url(params[:id])
-    else
+    # if current_user.nil? || current_user.id != @cat.user_id
+    #   flash[:errors] = "Cannot edit a cat that you don't own."
+    #   redirect_to cat_url(params[:id])
+    # else
       @params = {name: @cat.name, age: @cat.age, birth_date: @cat.birth_date,
         color: @cat.color, sex: @cat.sex}
       @colors = Cat.cat_colors
       render :edit
-    end
+    # end
   end
 
   def update
@@ -65,5 +57,15 @@ class CatsController < ApplicationController
       render :new
     end
   end
+
+  private
+
+  def check_owner
+    unless Cat.find(params[:id]).user_id == current_user.id
+      flash[:errors] = "You must be logged in as the owner of this cat to do that."
+      redirect_to cat_url(params[:id])
+    end
+  end
+
 
 end

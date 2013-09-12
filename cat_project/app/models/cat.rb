@@ -13,8 +13,6 @@ class Cat < ActiveRecord::Base
     primary_key: :id
     )
 
-
-
   before_validation :get_pic
 
   validates :sex, inclusion: { in: ["M", "F"]}

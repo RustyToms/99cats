@@ -33,7 +33,7 @@
     <tr>
       <td><%= "#{request.start_date}"%></td>
       <td><%= "#{request.end_date}"%></td>
-      <% if request.status == 'PENDING' %>
+      <% if request.status == 'PENDING' && @cat.user_id == current_user.id %>
         <td><%=button_to "Approve", approve_cat_rental_request_url(request.id), method: :post %></td>
         <td><%=button_to "Deny", deny_cat_rental_request_url(request.id), method: :post %></td>
       <%end%>
