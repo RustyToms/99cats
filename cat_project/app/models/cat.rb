@@ -23,18 +23,22 @@ class Cat < ActiveRecord::Base
     request = Addressable::URI.new(
     scheme: "https",
     host: "www.google.com",
-    path: "search",
-    query_values: {hl: "en", site: "imghp", source:'hp',
-      biw: '1920', bih: "1008", q: "#{self.name}+cat"}
+    path: "search?hl=en&site=imghp&tbm=isch&source=hp&biw=1920&bih=1008&",
+    query_values: {q: "#{self.name}+#{self.color}+cat",
+    oq:"#{self.name}+#{self.color}+cat",
+    tbm: "isch", tbs: "isz:m", gs_l: "img.12"}
     ).to_s
 
-    page = JSON.parse(RestClient.get(request))['results']
+    page = RestClient.get(request)
+
     img_arrs = page.scan(/<img.*?>/)
     pic_html = ''
+
     img_arrs.each do |img_html|
-      width = img_html.slice(/width.*?px/).slice(/\d+/).to_i
-      height = img_html.slice(/height.*?px/).slice(/\d+/).to_i
-      if width > 200 && height > 100
+
+      width = img_html.slice(/width.*?\s/).slice(/\d+/).to_i
+      height = img_html.slice(/height.*?\s/).slice(/\d+/).to_i
+      if width > 80 && height > 80
         pic_html = img_html
         break
       end
