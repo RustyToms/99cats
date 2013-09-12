@@ -1,7 +1,11 @@
-class User < ActiveRecord::Base
-  attr_accessible :user_name, :session_token
+require 'bcrypt'
 
+class User < ActiveRecord::Base
+  attr_accessible :user_name, :session_token, :password
   before_validation :ensure_session_token
+  validates :password_digest, presence: true
+  validates :password, length: { minimum: 2, allow_nil: true }
+  validates :user_name, :session_token, uniqueness: true
 
   #add uniqueness validations to everything
 
@@ -10,20 +14,29 @@ class User < ActiveRecord::Base
     if user.password_digest.is_password?(password)
       user
     else
-      nil #maybe raise an error here
+      nil
     end
   end
 
   def ensure_session_token
-    @session_token ||= reset_session_token!
+    self.session_token ||= SecureRandom::urlsafe_base64(16)
   end
 
   def reset_session_token!
-    @session_token = SecureRandom::urlsafe_base64(16)
+    self.session_token = SecureRandom::urlsafe_base64(16)
+    self.update_attributes(session_token: @session_token)
   end
 
   def password=(password)
-    @password_digest = BCrypt::Password.create(password)
+    if password == ""
+      return nil
+    else
+      self.password_digest = BCrypt::Password.create(password)
+    end
+  end
+
+  def password
+    @password
   end
 
   def is_password?(password)

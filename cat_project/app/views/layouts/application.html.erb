@@ -5,6 +5,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if flash.now[:errors] %>
+    <% flash.now[:errors].each do |error| %>
+     <%= error %><br />
+    <% end %>
+  <% end %>
   <!-- Params: <%= debug params %> -->
 <%= yield %>
 

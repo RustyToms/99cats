@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911233629) do
+ActiveRecord::Schema.define(:version => 20130912132435) do
 
   create_table "cat_rental_requests", :force => true do |t|
     t.integer  "cat_id",     :null => false
@@ -34,5 +34,17 @@ ActiveRecord::Schema.define(:version => 20130911233629) do
     t.datetime "updated_at", :null => false
     t.text     "pic_html"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "user_name",       :null => false
+    t.string   "password_digest", :null => false
+    t.string   "session_token",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "users", ["password_digest"], :name => "index_users_on_password_digest"
+  add_index "users", ["session_token"], :name => "index_users_on_session_token"
+  add_index "users", ["user_name"], :name => "index_users_on_user_name"
 
 end

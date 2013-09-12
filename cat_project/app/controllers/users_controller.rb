@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
 
   def new
@@ -7,14 +8,25 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
-
+    @user = User.new
+    @user.user_name = params[:user][:user_name]
+    @user.password = params[:user][:password]
+    puts "USER STUFF"
+    p @user
     if @user.save
-      redirect_to cats_url
+      self.current_user = @user
+      redirect_to user_url(@user)
     else
-      flash.now[:errors] = @user.errors.full_messages
-      render :new
+      flash[:errors] = @user.errors.full_messages
+      redirect_to new_user_url
     end
+  end
+
+  private
+
+  def show
+    @user = User.find_by_credentials(params[:user_name], params[:password])
+    render :show
   end
 
 end

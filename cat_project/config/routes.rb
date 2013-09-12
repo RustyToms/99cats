@@ -13,7 +13,9 @@ CatProject::Application.routes.draw do
     end
   end
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
+
+  resources :session, only: [:new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

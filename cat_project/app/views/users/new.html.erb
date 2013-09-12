@@ -1,0 +1,23 @@
+<h1><em>Welcome to 99 Cats</em> - Enter your name and pick a password!!!!</h1>
+
+
+<form action="<%= users_url %>" method="POST">
+
+  <table>
+
+    <tr>
+        <td>Name</td>
+        <td><input type="text" name="user[user_name]"></td>
+    </tr>
+
+    <tr>
+        <td>Password</td>
+        <td><input type="text" name="user[password]"></td>
+    </tr>
+
+  </table>
+
+  <input type="submit" value="New Cat Lover">
+
+</form>
+
