@@ -30,11 +30,28 @@ class Cat < ActiveRecord::Base
     ).to_s
 
     page = RestClient.get(request)
+    puts "
+
+
+    #{page}
+
+
+
+    "
 
     img_arrs = page.scan(/<img.*?>/)
     pic_html = ''
 
     img_arrs.each do |img_html|
+      puts "
+
+
+
+      #{img_html}
+
+
+
+      "
 
       width = img_html.slice(/width.*?\s/).slice(/\d+/).to_i
       height = img_html.slice(/height.*?\s/).slice(/\d+/).to_i
