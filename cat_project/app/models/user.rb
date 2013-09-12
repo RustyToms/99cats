@@ -7,7 +7,12 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 2, allow_nil: true }
   validates :user_name, :session_token, uniqueness: true
 
-  #add uniqueness validations to everything
+  has_many(
+    :cats,
+    class_name: "Cat",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
 
   def self.find_by_credentials(user_name, password)
     user = User.where("user_name = ?", user_name)

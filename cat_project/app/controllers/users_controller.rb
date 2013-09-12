@@ -22,10 +22,8 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
   def show
-    @user = User.find_by_credentials(params[:user_name], params[:password])
+    @user = User.find(params[:id])
     render :show
   end
 

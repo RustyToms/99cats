@@ -6,9 +6,17 @@
 </head>
 <body>
   <% if flash.now[:errors] %>
-    <% flash.now[:errors].each do |error| %>
-     <%= error %><br />
-    <% end %>
+    <%= flash.now[:errors] %>
+  <% end %><br>
+  <% if !current_user.nil? %>
+  <ul>
+    <li>Logged in as: <%= current_user.user_name %></li>
+    <li><%= button_to "Logout", session_url, method: :delete %></li>
+  </ul>
+  <% else %>
+    <li>Not Currently Log In</li>
+    <li><%= button_to "Log In", new_session_url, method: :get %></li>
+    <li><%= button_to "Create New Account", new_user_url, method: :get %></li>
   <% end %>
   <!-- Params: <%= debug params %> -->
 <%= yield %>
@@ -16,6 +24,7 @@
 <a href= "<%=cats_url%>">Show all cats</a>
 <a href= "<%=new_cat_url%>">Create a new cat!</a>
 <a href= "<%=new_cat_rental_request_url%>">Reserve a cat!</a>
+
 
 </body>
 </html>

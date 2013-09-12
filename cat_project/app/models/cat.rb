@@ -4,7 +4,16 @@ require 'rest-client'
 
 class Cat < ActiveRecord::Base
   CAT_COLORS = %w(black orange calico white brown grey blue steel striped spotted tan)
-  attr_accessible :age, :birth_date, :color, :name, :sex, :pic_html
+  attr_accessible :age, :birth_date, :color, :name, :sex, :pic_html, :user_id
+
+  belongs_to(
+    :owner,
+    class_name: "User",
+    foreign_key: :user_id,
+    primary_key: :id
+    )
+
+
 
   before_validation :get_pic
 

@@ -17,9 +17,10 @@ class SessionsController < ApplicationController
     render :new
   end
 
-  def destroy!
+  def destroy
     # blank out the cookie?
     current_user.reset_session_token!
+    redirect_to cats_url
 
   end
 

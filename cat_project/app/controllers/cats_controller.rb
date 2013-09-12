@@ -18,9 +18,27 @@ class CatsController < ApplicationController
 
   def edit
     @cat = Cat.find(params[:id])
-    @params = {name: @cat.name, age: @cat.age, birth_date: @cat.birth_date,               color: @cat.color, sex: @cat.sex}
-    @colors = Cat.cat_colors
-    render :edit
+    puts "
+
+
+
+    CURRENT USER ID
+
+
+
+
+    "
+    p current_user
+
+    if current_user.nil? || current_user.id != @cat.user_id
+      flash[:errors] = "Cannot edit a cat that you don't own."
+      redirect_to cat_url(params[:id])
+    else
+      @params = {name: @cat.name, age: @cat.age, birth_date: @cat.birth_date,
+        color: @cat.color, sex: @cat.sex}
+      @colors = Cat.cat_colors
+      render :edit
+    end
   end
 
   def update
@@ -39,6 +57,7 @@ class CatsController < ApplicationController
     @params = params[:cat]
     @cat = Cat.new(params[:cat])
     @colors = Cat.cat_colors
+    @cat.user_id = current_user
     if @cat.save
       @cats = Cat.all
       redirect_to cats_url
@@ -46,4 +65,5 @@ class CatsController < ApplicationController
       render :new
     end
   end
+
 end
